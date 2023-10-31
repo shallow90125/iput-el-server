@@ -17,15 +17,26 @@ app.onError((error, c) => {
   app.route("/", routes[key]),
 );
 
+(Object.keys(subs) as (keyof typeof subs)[]).map((key) => mqtt.subscribe(key));
+
 mqtt.on("message", (topic, payload) => {
   (Object.keys(subs) as (keyof typeof subs)[]).map((key) => {
-    if (topic === key) subs[key].callback(payload);
+    if (topic === key) {
+      console.log(
+        `[${new Date().toLocaleTimeString()}] Sub "${topic}": Received`,
+      );
+      return subs[key].callback(payload);
+    }
   });
 });
 
 serve(
   { ...app, hostname: config.host.address, port: config.host.port },
   (info) => {
-    console.log(`http://${info.address}:${info.port}`);
+    console.log(
+      `[${new Date().toLocaleTimeString()}] http://${info.address}:${
+        info.port
+      }/`,
+    );
   },
 );

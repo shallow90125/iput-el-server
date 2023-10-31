@@ -1,10 +1,9 @@
-import { AlarmDoc } from "./Alarm";
+import { PiDoc } from "./PiDoc";
 
 export interface PubTopic {
-  temperature: AlarmDoc;
+  set: PiDoc;
 }
 
 export interface SubTopic {
-  temperature: string;
-  status: boolean;
+  init: { piId: string };
 }
