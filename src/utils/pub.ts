@@ -9,11 +9,11 @@ export function pub<K extends keyof PubTopic>(
   mqtt.publish(`${topic}/${piId}`, JSON.stringify(payload), (error) => {
     if (error) {
       console.log(
-        `[${new Date().toLocaleTimeString()}] Pub "${topic}": Failed`,
+        `[${new Date().toLocaleTimeString()}] Pub "${topic}/${piId}": Failed`,
       );
     } else {
       console.log(
-        `[${new Date().toLocaleTimeString()}] Pub "${topic}": Succeeded`,
+        `[${new Date().toLocaleTimeString()}] Pub "${topic}/${piId}": Succeeded`,
       );
     }
   });

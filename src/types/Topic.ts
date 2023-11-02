@@ -5,5 +5,5 @@ export interface PubTopic {
 }
 
 export interface SubTopic {
-  init: { piId: string };
+  server: PiDoc;
 }

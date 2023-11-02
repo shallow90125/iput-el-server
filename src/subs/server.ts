@@ -3,7 +3,7 @@ import { PiDoc } from "@/types/PiDoc";
 import { piCol, pub } from "@/utils";
 import { ObjectId, WithId } from "mongodb";
 
-export const init = new Sub("init", async (payload) => {
+export const server = new Sub("server", async (payload) => {
   let doc: WithId<PiDoc> | null = null;
 
   if (payload.piId) {
@@ -11,12 +11,16 @@ export const init = new Sub("init", async (payload) => {
   }
 
   if (doc) {
-    pub("set", doc.piId, doc);
+    await piCol.updateOne({ _id: new ObjectId(doc._id) }, { on: payload.on });
     return;
   }
 
-  const id = new ObjectId();
-  const newDoc: WithId<PiDoc> = { _id: id, piId: id.toString(), on: false };
+  const id = payload.piId;
+  const newDoc: WithId<PiDoc> = {
+    _id: new ObjectId(payload.piId),
+    piId: payload.piId,
+    on: payload.on,
+  };
 
   await piCol.insertOne(newDoc);
 
