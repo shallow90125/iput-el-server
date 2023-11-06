@@ -1,6 +1,8 @@
 import { Alarm } from "@/types/Alarm";
+import { Mode } from "@/types/Mode";
 import { Agenda } from "@hokify/agenda";
 import { config } from "./config";
+import { piCol } from "./db";
 import { pub } from "./pub";
 
 export const agenda = new Agenda({
@@ -18,5 +20,25 @@ agenda.define<Alarm>("alarm", async (job) => {
   await job.save();
 
   const piId = job.attrs.data.piId;
-  pub("set", piId, { piId: piId, on: true });
+
+  const rand = Math.floor(Math.random() * 2);
+
+  let mode: Mode;
+
+  switch (rand) {
+    case 0:
+      mode = "button";
+      break;
+
+    case 1:
+      mode = "temperature";
+      break;
+
+    default:
+      mode = "button";
+      break;
+  }
+
+  pub("set", piId, { piId: piId, on: true, mode: mode });
+  piCol.findOneAndUpdate({ piId: piId }, { $set: { on: true } });
 });

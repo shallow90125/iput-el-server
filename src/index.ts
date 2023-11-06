@@ -4,6 +4,7 @@ import { agenda, config, mqtt } from "@/utils";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
+import { sub } from "./utils/sub";
 
 (async () => {
   await agenda.start();
@@ -20,12 +21,10 @@ import { logger } from "hono/logger";
     app.route("/", routes[key]),
   );
 
-  (Object.keys(subs) as (keyof typeof subs)[]).map((key) =>
-    mqtt.subscribe(key),
-  );
+  (Object.keys(subs) as (keyof typeof subs)[]).map((key) => sub(key));
 
   mqtt.on("connect", () => {
-    console.log();
+    console.log(`[${new Date().toLocaleTimeString()}] ${config.mqtt.address}`);
   });
 
   mqtt.on("message", (topic, payload) => {

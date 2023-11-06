@@ -1,9 +1,9 @@
 import { PiDoc } from "./PiDoc";
 
 export interface PubTopic {
-  set: PiDoc;
+  set: Pick<PiDoc, "piId" | "on" | "mode">;
 }
 
 export interface SubTopic {
-  server: PiDoc;
+  server: Partial<PiDoc> & Pick<PiDoc, "piId">;
 }
