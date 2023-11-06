@@ -13,6 +13,8 @@ alarmsPost.post(
     const { piId } = c.req.param();
     const alarms: Alarm[] = c.req.valid("json");
 
+    await agenda.cancel({ "data.piId": piId });
+
     alarms.forEach(async (alarm) => {
       const job = agenda.create<Alarm>("alarm", alarm);
 

@@ -5,7 +5,7 @@ import { z } from "zod";
 
 export const userPost = new Hono();
 
-userPost.get(
+userPost.post(
   "/user/:uid",
   zValidator(
     "json",
@@ -14,11 +14,13 @@ userPost.get(
     }),
   ),
   async (c) => {
-    const { uid } = c.req.param();
+    const uid = c.req.param("uid");
     const { piId } = c.req.valid("json");
+    console.log("piId");
+    console.log(piId);
 
     const doc = await piCol.findOneAndUpdate(
-      { piId: piId, uid: "" },
+      { piId: piId },
       { $set: { uid: uid } },
     );
 
