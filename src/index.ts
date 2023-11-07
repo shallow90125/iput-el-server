@@ -44,7 +44,7 @@ import { sub } from "./utils/sub";
       console.log(
         `[${new Date().toLocaleTimeString()}] http://${info.address}:${
           info.port
-        }/`,
+        }`,
       );
     },
   );

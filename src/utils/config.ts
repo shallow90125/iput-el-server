@@ -12,7 +12,9 @@ export const config = {
     clientId: process.env.MQTT_CLIENT_ID!,
   },
   mongo: {
-    address: process.env.MONGO_PRIVATE_URL!,
+    url: process.env.MONGO_PRIVATE_URL!,
     db: process.env.MONGO_DB!,
+    username: process.env.MONGOUSER,
+    password: process.env.MONGOPASSWORD,
   },
 };
