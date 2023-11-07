@@ -7,7 +7,13 @@ import { pub } from "./pub";
 
 export const agenda = new Agenda({
   db: {
-    address: `${config.mongo.address}/${config.mongo.db}`,
+    address: `${config.mongo.url}/${config.mongo.db}`,
+    options: {
+      auth: {
+        username: config.mongo.username,
+        password: config.mongo.password,
+      },
+    },
   },
 });
 
