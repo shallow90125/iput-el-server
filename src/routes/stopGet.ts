@@ -1,12 +1,16 @@
-import { pub } from "@/utils";
+import { piCol, pub } from "@/utils";
 import { Hono } from "hono";
 
 export const stopGet = new Hono();
 
-stopGet.get("/stop/:piId", async (c) => {
-  const { piId } = c.req.param();
+stopGet.get("/stop/:uid", async (c) => {
+  const { uid } = c.req.param();
 
-  pub("set", piId, { piId: piId, on: false, mode: "button" });
+  const doc = await piCol.findOne({ uid: uid });
+
+  if (!doc) return c.notFound();
+
+  pub("set", doc.piId, { piId: doc.piId, on: false, mode: "button" });
 
   return c.text("ok");
 });
