@@ -1,9 +1,9 @@
 import { PiDoc } from "@/types/PiDoc";
 import { MongoClient } from "mongodb";
-import { config } from "./config";
+import { zEnv } from "./env";
 
-export const db = new MongoClient(config.mongo.url, {
+export const db = new MongoClient(zEnv.MONGO_PRIVATE_URL, {
   authSource: "admin",
-}).db(config.mongo.db);
+}).db(zEnv.MONGO_DB);
 
 export const piCol = db.collection<PiDoc>("pi");

@@ -1,13 +1,13 @@
 import { Alarm } from "@/types/Alarm";
 import { Mode } from "@/types/Mode";
 import { Agenda } from "@hokify/agenda";
-import { config } from "./config";
 import { piCol } from "./db";
+import { zEnv } from "./env";
 import { pub } from "./pub";
 
 export const agenda = new Agenda({
   db: {
-    address: `${config.mongo.url}/${config.mongo.db}`,
+    address: `${zEnv.MONGO_PRIVATE_URL}/${zEnv.MONGO_DB}`,
     options: {
       authSource: "admin",
     },

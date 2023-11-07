@@ -1,6 +1,6 @@
 import * as routes from "@/routes";
 import * as subs from "@/subs";
-import { agenda, config, mqtt } from "@/utils";
+import { agenda, mqtt, zEnv } from "@/utils";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
@@ -24,7 +24,7 @@ import { sub } from "./utils/sub";
   (Object.keys(subs) as (keyof typeof subs)[]).map((key) => sub(key));
 
   mqtt.on("connect", () => {
-    console.log(`[${new Date().toLocaleTimeString()}] ${config.mqtt.address}`);
+    console.log(`[${new Date().toLocaleTimeString()}] ${zEnv.MQTT_URL}`);
   });
 
   mqtt.on("message", (topic, payload) => {
@@ -38,14 +38,11 @@ import { sub } from "./utils/sub";
     });
   });
 
-  serve(
-    { ...app, hostname: config.host.address, port: config.host.port },
-    (info) => {
-      console.log(
-        `[${new Date().toLocaleTimeString()}] http://${info.address}:${
-          info.port
-        }`,
-      );
-    },
-  );
+  serve({ ...app, hostname: zEnv.ADDRESS, port: Number(zEnv.PORT) }, (info) => {
+    console.log(
+      `[${new Date().toLocaleTimeString()}] http://${info.address}:${
+        info.port
+      }`,
+    );
+  });
 })();

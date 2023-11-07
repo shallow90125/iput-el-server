@@ -3,20 +3,26 @@ import { piCol } from "@/utils";
 import { ObjectId } from "mongodb";
 
 export const server = new Sub("server", async (payload) => {
-  await piCol.findOneAndUpdate(
-    { piId: payload.piId },
-    {
-      $setOnInsert: {
-        _id: new ObjectId(payload.piId),
-        uid: "",
-        mode: "button",
-        temperature: 0,
-        on: false,
+  const doc = await piCol.findOne({ piId: payload.piId });
+
+  if (doc) {
+    await piCol.updateOne(
+      { piId: payload.piId },
+      {
+        $set: {
+          ...payload,
+        },
       },
-      $set: {
-        ...payload,
-      },
-    },
-    { upsert: true },
-  );
+    );
+    return;
+  }
+
+  await piCol.insertOne({
+    _id: new ObjectId(payload.piId),
+    piId: payload.piId,
+    uid: "",
+    on: false,
+    mode: "button",
+    temperature: 0,
+  });
 });
