@@ -7,7 +7,7 @@ import { pub } from "./pub";
 
 export const agenda = new Agenda({
   db: {
-    address: config.mongo.address + config.mongo.db,
+    address: `${config.mongo.address}/${config.mongo.db}`,
   },
 });
 
