@@ -14,7 +14,5 @@ export const config = {
   mongo: {
     url: process.env.MONGO_PRIVATE_URL!,
     db: process.env.MONGO_DB!,
-    username: process.env.MONGOUSER,
-    password: process.env.MONGOPASSWORD,
   },
 };
