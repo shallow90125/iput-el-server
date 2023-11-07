@@ -9,10 +9,7 @@ export const agenda = new Agenda({
   db: {
     address: `${config.mongo.url}/${config.mongo.db}`,
     options: {
-      auth: {
-        username: config.mongo.username,
-        password: config.mongo.password,
-      },
+      authSource: "admin",
     },
   },
 });
