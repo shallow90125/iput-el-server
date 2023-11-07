@@ -2,8 +2,8 @@ import "dotenv/config";
 
 export const config = {
   host: {
-    address: process.env.HOST_ADDRESS!,
-    port: Number(process.env.HOST_PORT!),
+    address: process.env.ADDRESS!,
+    port: Number(process.env.PORT!),
   },
   mqtt: {
     address: process.env.MQTT_ADDRESS!,
@@ -12,7 +12,7 @@ export const config = {
     clientId: process.env.MQTT_CLIENT_ID!,
   },
   mongo: {
-    address: process.env.MONGO_ADDRESS!,
+    address: process.env.MONGO_PRIVATE_URL!,
     db: process.env.MONGO_DB!,
   },
 };
