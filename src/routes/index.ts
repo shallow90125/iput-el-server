@@ -1,7 +1,7 @@
-export { alarmsGet } from "./alarmsGet";
-export { alarmsPost } from "./alarmsPost";
-export { buttonGet } from "./buttonGet";
-export { stopGet } from "./stopGet";
-export { temperatureGet } from "./temperatureGet";
-export { userGet } from "./userGet";
-export { userPost } from "./userPost";
+export { alarmsGet } from "./alarms-get";
+export { alarmsPost } from "./alarms-post";
+export { buttonGet } from "./button-get";
+export { stopGet } from "./stop-get";
+export { temperatureGet } from "./temperature-get";
+export { userGet } from "./user-get";
+export { userPost } from "./user-post";
