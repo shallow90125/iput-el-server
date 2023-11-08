@@ -1,5 +1,4 @@
-import { Alarm } from "@/types";
-import { PiDoc } from "@/types/PiDoc";
+import { Alarm, PiDoc } from "@/types";
 import { agenda } from "@/utils";
 import { piCol } from "@/utils/db";
 import { Hono } from "hono";

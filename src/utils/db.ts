@@ -1,4 +1,4 @@
-import { PiDoc } from "@/types/PiDoc";
+import { PiDoc } from "@/types";
 import { MongoClient } from "mongodb";
 import { zEnv } from "./env";
 

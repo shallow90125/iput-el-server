@@ -6,7 +6,7 @@ export class Sub<K extends keyof SubTopic> {
     await this.process(payload);
   };
 
-  private process: (payload: SubTopic[K]) => void;
+  private process: (payload: SubTopic[K]) => Promise<void>;
 
   constructor(topic: K, callback: (payload: SubTopic[K]) => Promise<void>) {
     this.process = callback;

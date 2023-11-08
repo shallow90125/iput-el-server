@@ -1,12 +1,12 @@
-import { PiDoc } from "@/types/PiDoc";
+import { PiDoc } from "@/types";
 import { piCol } from "@/utils";
 import { Hono } from "hono";
 
 export const buttonGet = new Hono();
 
-buttonGet.get("/button/:uid", async (c) => {
-  const { uid } = c.req.param();
-  const doc = await piCol.findOne({ uid: uid });
+buttonGet.get("/pi/:piId/button", async (c) => {
+  const { piId } = c.req.param();
+  const doc = await piCol.findOne({ piId: piId });
 
   if (!doc) return c.notFound();
 

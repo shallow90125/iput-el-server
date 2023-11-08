@@ -1,14 +1,5 @@
 import { z } from "zod";
 
-export interface Alarm {
-  piId: string;
-  hour: number;
-  minute: number;
-  dayOfWeek: number[];
-  isEnabled: boolean;
-  timezone: string;
-}
-
 export const zAlarm = z.object({
   piId: z.string(),
   hour: z.number().gte(0).lte(23),
@@ -17,3 +8,5 @@ export const zAlarm = z.object({
   isEnabled: z.boolean(),
   timezone: z.string(),
 });
+
+export type Alarm = z.infer<typeof zAlarm>;

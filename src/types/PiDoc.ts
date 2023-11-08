@@ -1,5 +1,3 @@
-import { Mode } from "./Mode";
-
 export interface PiDoc {
   temperature: number;
   mode: Mode;
@@ -7,3 +5,5 @@ export interface PiDoc {
   uid: string;
   on: boolean;
 }
+
+export type Mode = "button" | "temperature";
