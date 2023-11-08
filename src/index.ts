@@ -5,12 +5,13 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { bearerAuth } from "hono/bearer-auth";
 import { logger } from "hono/logger";
+import { RegExpRouter } from "hono/router/reg-exp-router";
 import { sub } from "./utils/sub";
 
 (async () => {
   await agenda.start();
 
-  const app = new Hono();
+  const app = new Hono({ router: new RegExpRouter() });
 
   app.use("*", logger());
   app.use("*", bearerAuth({ token: zEnv.TOKEN }));
