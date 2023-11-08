@@ -4,6 +4,7 @@ import { z } from "zod";
 const envSchema = z.object({
   ADDRESS: z.string(),
   PORT: z.string(),
+  TOKEN: z.string(),
   MQTT_URL: z.string(),
   MQTT_USERNAME: z.string(),
   MQTT_PASSWORD: z.string(),
