@@ -16,7 +16,7 @@ import { sub } from "./utils/sub";
 
   app.use("*", logger());
   app.use("*", bearerAuth({ token: zEnv.TOKEN }));
-  app.use("*", cors({ origin: "*" }));
+  app.use("*", cors({ origin: [zEnv.APP_URL] }));
   app.onError((error, c) => {
     console.error(error);
     return c.text(error.message, 500);

@@ -7,6 +7,7 @@ const envSchema = z.object({
   ADDRESS: varSchema,
   PORT: varSchema,
   TOKEN: varSchema,
+  APP_URL: varSchema,
   MQTT_URL: varSchema,
   MQTT_USERNAME: varSchema,
   MQTT_PASSWORD: varSchema,
