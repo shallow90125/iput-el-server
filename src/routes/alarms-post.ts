@@ -15,21 +15,23 @@ alarmsPost.post(
 
     await agenda.cancel({ "data.piId": piId });
 
-    alarms.forEach(async (alarm) => {
-      const job = agenda.create<Alarm>("alarm", alarm);
+    alarms
+      .map((v) => ({ ...v, piId: piId }))
+      .forEach(async (alarm) => {
+        const job = agenda.create<Alarm>("alarm", alarm);
 
-      const cron = [];
-      cron.push(String(alarm.minute));
-      cron.push(String(alarm.hour));
-      cron.push("*");
-      cron.push("*");
-      cron.push(alarm.dayOfWeek.length ? alarm.dayOfWeek.join(",") : "*");
+        const cron = [];
+        cron.push(String(alarm.minute));
+        cron.push(String(alarm.hour));
+        cron.push("*");
+        cron.push("*");
+        cron.push(alarm.dayOfWeek.length ? alarm.dayOfWeek.join(",") : "*");
 
-      job.repeatEvery(cron.join(" "), { timezone: alarm.timezone });
-      if (!alarm.isEnabled) job.disable();
+        job.repeatEvery(cron.join(" "), { timezone: alarm.timezone });
+        if (!alarm.isEnabled) job.disable();
 
-      await job.save();
-    });
+        await job.save();
+      });
 
     return c.text("ok");
   },

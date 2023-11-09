@@ -3,7 +3,7 @@ import { Hono } from "hono";
 
 export const stopPost = new Hono();
 
-stopPost.get("/pi/:piId/stop", async (c) => {
+stopPost.post("/pi/:piId/stop", async (c) => {
   const { piId } = c.req.param();
 
   pub("set", piId, { piId: piId, on: false, mode: "button" });
