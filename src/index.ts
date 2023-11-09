@@ -4,6 +4,7 @@ import { agenda, mqtt, zEnv } from "@/utils";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { bearerAuth } from "hono/bearer-auth";
+import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { RegExpRouter } from "hono/router/reg-exp-router";
 import { sub } from "./utils/sub";
@@ -15,6 +16,7 @@ import { sub } from "./utils/sub";
 
   app.use("*", logger());
   app.use("*", bearerAuth({ token: zEnv.TOKEN }));
+  app.use("*", cors({ origin: "*" }));
   app.onError((error, c) => {
     console.error(error);
     return c.text(error.message, 500);
