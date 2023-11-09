@@ -1,12 +1,12 @@
-import { PiDoc } from "@/types/PiDoc";
+import { PiDoc } from "@/types";
 import { piCol } from "@/utils";
 import { Hono } from "hono";
 
 export const temperatureGet = new Hono();
 
-temperatureGet.get("/temperature/:uid", async (c) => {
-  const { uid } = c.req.param();
-  const doc = await piCol.findOne({ uid: uid });
+temperatureGet.get("/pi/:piId/temperature", async (c) => {
+  const { piId } = c.req.param();
+  const doc = await piCol.findOne({ piId: piId });
 
   if (!doc) return c.notFound();
 

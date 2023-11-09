@@ -1,15 +1,18 @@
 import "dotenv/config";
 import { z } from "zod";
 
+const varSchema = z.string().min(1);
+
 const envSchema = z.object({
-  ADDRESS: z.string(),
-  PORT: z.string(),
-  MQTT_URL: z.string(),
-  MQTT_USERNAME: z.string(),
-  MQTT_PASSWORD: z.string(),
-  MQTT_CLIENT_ID: z.string(),
-  MONGO_PRIVATE_URL: z.string(),
-  MONGO_DB: z.string(),
+  ADDRESS: varSchema,
+  PORT: varSchema,
+  TOKEN: varSchema,
+  MQTT_URL: varSchema,
+  MQTT_USERNAME: varSchema,
+  MQTT_PASSWORD: varSchema,
+  MQTT_CLIENT_ID: varSchema,
+  MONGO_PRIVATE_URL: varSchema,
+  MONGO_DB: varSchema,
 });
 
 export const zEnv = envSchema.parse(

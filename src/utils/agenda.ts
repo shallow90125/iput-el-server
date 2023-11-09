@@ -1,5 +1,4 @@
-import { Alarm } from "@/types/Alarm";
-import { Mode } from "@/types/Mode";
+import { Alarm, Mode } from "@/types";
 import { Agenda } from "@hokify/agenda";
 import { piCol } from "./db";
 import { zEnv } from "./env";
