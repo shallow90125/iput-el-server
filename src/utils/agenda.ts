@@ -42,5 +42,5 @@ agenda.define<Alarm>("alarm", async (job) => {
   }
 
   pub("set", piId, { piId: piId, on: true, mode: mode });
-  piCol.findOneAndUpdate({ piId: piId }, { $set: { on: true } });
+  piCol.findOneAndUpdate({ piId: piId }, { $set: { on: true, mode: mode } });
 });
